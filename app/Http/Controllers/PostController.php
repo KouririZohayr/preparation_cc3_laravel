@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Gate;
 class PostController extends Controller
 {
     /**
@@ -13,6 +13,7 @@ class PostController extends Controller
     public function index()
     {
         $Post = Post::all();
+
         return view('TabllePoste',['posts'=>$Post]);
 
     }
@@ -62,11 +63,17 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post , $id)
     {
-        $post=Post::find($id);
-        $post->update([
-            "title" => $request->title,
-            "content" =>$request->content
-        ]);
+        $post=Post::find($id);;
+        if (! Gate::allows('update-post', $post)) {
+            abort(403);
+        }else{
+            $post=Post::find($id);
+            $post->update([
+                "title" => $request->title,
+                "content" =>$request->content
+            ]);
+        }
+       
          return redirect('/Post');
 
 
