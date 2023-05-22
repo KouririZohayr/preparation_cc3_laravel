@@ -15,10 +15,14 @@ class PublicationController extends Controller
         $publications =Publication::all();
         foreach ($publications as $publication) {
             if ($publication->publicationable_type === 'App\Models\Tweet'){
+
+                if($publication->id ===2){
+                    echo $publication ;
+                }
+             
+            }/* elseif($publication->publicationable_type === 'App\Models\Instagram_post'){
                 echo $publication ;
-            }elseif($publication->publicationable_type === 'App\Models\Instagram_post'){
-                echo $publication ;
-            } };
+            } */ };
         /* $publications = Publication::with('publicationable')->get();
         foreach ($publications as $publication) {
          if ($publication->publicationable_type === 'App\Models\Tweet') {
