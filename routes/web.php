@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ArticleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,5 +33,6 @@ Route::middleware('auth')->group(function () {
 Route::resource('Post', PostController::class);
 Route::resource('/Publication', PublicationController::class);
 Route::get("/send",[OrderController::class,'sendEmail']);
+Route::resource('article', ArticleController::class);
 
 require __DIR__.'/auth.php';

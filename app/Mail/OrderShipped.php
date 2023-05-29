@@ -16,9 +16,10 @@ class OrderShipped extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    private $a ;
+    public function __construct($a)
     {
-        //
+       $this->a =$a ;
     }
 
     /**
@@ -27,7 +28,7 @@ class OrderShipped extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'test email',
+            subject: 'article',
         );
     }
 
@@ -35,10 +36,18 @@ class OrderShipped extends Mailable
      * Get the message content definition.
      */
     public function content(): Content
+
     {
+
         return new Content(
-            view: 'welcome',
+
+            view: 'sendEmailblade',
+            with: [
+                'title' => $this->a->title,
+                'contenu' => $this->a->contenu,
+                ],
         );
+        return redirect('/article');
     }
 
     /**
